@@ -305,3 +305,4 @@ strong { color: var(--text); font-weight: 600; }
   html { scroll-behavior: auto; }
 }
 .chat__chips[hidden], .match__result[hidden] { display: none; }
+.ai-badge { font: 600 .65rem var(--mono); padding: 2px 6px; border-radius: 5px; background: var(--accent-soft); color: var(--accent); vertical-align: middle; margin-left: 4px; }

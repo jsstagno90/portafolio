@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Juan Stagno — Full Stack · AI Automation</title>
-  <meta name="description" content="Portfolio de Juan Stagno: apps web con IA para negocios reales. Proyectos, decisiones técnicas y un asistente que responde tus preguntas.">
+  <meta name="description" content="Portfolio de Juan Stagno: apps web con IA para negocios reales. Proyectos, decisiones técnicas y un chat con IA para preguntarme lo que quieras.">
   <meta property="og:title" content="Juan Stagno — Full Stack · AI Automation">
   <meta property="og:description" content="Proyectos reales, las decisiones detrás de cada uno, y un asistente con IA para preguntarme lo que quieras.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -42,7 +42,7 @@
         <h1>Hola, soy Juan.<br><span class="muted" id="heroRole"></span></h1>
         <p class="lead" id="heroTagline"></p>
         <div class="hero__cta">
-          <button class="btn btn--primary" data-open-chat>Preguntale a mi asistente</button>
+          <button class="btn btn--primary" data-open-chat>Chateá con mi versión IA</button>
           <a class="btn btn--ghost" href="#match">¿Encajo en tu búsqueda? →</a>
         </div>
         <ul class="hero__stats" id="heroStats"></ul>
@@ -131,16 +131,16 @@
   </footer>
 
   <!-- CHAT -->
-  <button class="chat-fab" data-open-chat aria-label="Abrir el asistente">
+  <button class="chat-fab" data-open-chat aria-label="Abrir el chat">
     <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-5 4v-4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm4 7a1.3 1.3 0 1 0 0-2.6A1.3 1.3 0 0 0 8 11Zm4 0a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6Zm4 0a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6Z"/></svg>
     <span>Preguntame</span>
   </button>
 
-  <section class="chat" id="chat" role="dialog" aria-label="Asistente de Juan" aria-modal="false" hidden>
+  <section class="chat" id="chat" role="dialog" aria-label="Chat con la versión IA de Juan" aria-modal="false" hidden>
     <header class="chat__head">
       <div>
-        <strong>Asistente de Juan</strong>
-        <p class="small muted">Responde con info real de mis proyectos</p>
+        <strong>Juan <span class="ai-badge">IA</span></strong>
+        <p class="small muted">Respuestas generadas por IA con info real mía</p>
       </div>
       <button class="icon-btn" id="chatClose" aria-label="Cerrar">✕</button>
     </header>

@@ -232,10 +232,10 @@
 
     // Preguntas sugeridas que aparecen en el chat
     suggestedQuestions: [
-      '¿Qué experiencia tiene con IA?',
-      '¿Cuál es su proyecto más completo?',
-      '¿Trabajó con clientes reales?',
-      '¿Cómo maneja la seguridad?'
+      '¿Qué experiencia tenés con IA?',
+      '¿Cuál es tu proyecto más completo?',
+      '¿Trabajaste con clientes reales?',
+      '¿Cómo manejás la seguridad?'
     ]
   };
 

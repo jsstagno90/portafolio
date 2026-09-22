@@ -143,7 +143,7 @@
     chat.hidden = false;
     fab.hidden = true;
     if (!body.children.length) {
-      addMsg('bot', '¡Hola! Soy el asistente de Juan. Preguntame lo que quieras sobre sus proyectos, cómo trabaja o qué sabe hacer. Respondo solo con información real.');
+      addMsg('bot', '¡Hola! Soy Juan (bueno, mi versión IA). Preguntame lo que quieras sobre mis proyectos, cómo trabajo o qué sé hacer. Respondo solo con información real.');
     }
     input.focus();
   }
@@ -173,7 +173,7 @@
       history.push({ role: 'user', text: text }, { role: 'model', text: data.reply });
     } catch (err) {
       typing.className = 'msg msg--error';
-      typing.textContent = err.message + ' Mientras tanto, podés escribirle a Juan a ' + P.email + '.';
+      typing.textContent = err.message + ' Mientras tanto, escribime a ' + P.email + '.';
     }
     body.scrollTop = body.scrollHeight;
     busy = false;
