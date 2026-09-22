@@ -159,18 +159,23 @@ async function callModel(model, apiKey, body) {
 }
 
 async function callGemini(apiKey, body) {
-  var lastErr;
+  var lastErr, sawQuota = false, tried = [];
   for (var i = 0; i < GEMINI_MODELS.length; i++) {
     try {
       return await callModel(GEMINI_MODELS[i], apiKey, body);
     } catch (err) {
       lastErr = err;
+      tried.push(GEMINI_MODELS[i] + ':' + err.status);
+      if (err.status === 429) sawQuota = true;
       console.error(err.message);
       // Solo paso al siguiente modelo si el problema es de capacidad/cuota
       // o de un modelo que no existe más. Si la key es inválida, no tiene sentido.
       if ([404, 429, 500, 503].indexOf(err.status) === -1) break;
     }
   }
+  // Si algún modelo dijo "sin cuota", ese es el problema real (aunque el último haya fallado por otra cosa)
+  if (sawQuota) lastErr.status = 429;
+  lastErr.tried = tried.join(', ');
   throw lastErr;
 }
 
@@ -242,6 +247,6 @@ module.exports = async function handler(req, res) {
     if (err.status === 429) {
       return res.status(429).json({ error: 'Hoy recibí muchas preguntas y se me agotó la cuota gratis de IA. Probá más tarde.' });
     }
-    return res.status(502).json({ error: 'El asistente tuvo un problema. Probá de nuevo en un rato.' });
+    return res.status(502).json({ error: 'El asistente tuvo un problema. Probá de nuevo en un rato.', debug: err.tried || String(err.status || '') });
   }
 };

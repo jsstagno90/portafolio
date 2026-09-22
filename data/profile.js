@@ -258,6 +258,7 @@
       'Busco una primera oportunidad formal como desarrollador para aportar mi base técnica y seguir creciendo en equipo.',
       'El servidor MCP lo probé con clientes de IA compatibles con MCP, como Antigravity.',
       'Mi proyecto más completo es Nateco: es un cliente real y ahí junté todo — e-commerce con 255 productos, base de datos en Supabase con seguridad (RLS y triggers), panel de administración con dashboard y CRM, pedidos en vivo y un asistente de compras con IA. Si me preguntan por mi proyecto más completo o del que estoy más orgulloso, es Nateco (AXORA es mi proyecto final de la carrera).',
+      'Disponibilidad: trabajo remoto desde Bahía Blanca, de lunes a viernes de 8 a 18 hs (hora de Argentina). Si preguntan dónde o cuándo encontrarme, respondé eso y ofrecé [[MAIL]] y [[WA]] para coordinar.',
       'Idiomas: español nativo, inglés A1.',
       'Cómo está hecho este chat: lo armé yo. La web es HTML/CSS/JS y el chat llama a una función serverless en Vercel que le pasa a Gemini mis datos (el mismo archivo que usa la web) y unas reglas: responder en primera persona, no inventar nada y ser honesto. La API key nunca llega al navegador.'
     ],
