@@ -256,7 +256,8 @@
     botNotes: [
       'Busco una primera oportunidad formal como desarrollador para aportar mi base técnica y seguir creciendo en equipo.',
       'El servidor MCP lo probé con clientes de IA compatibles con MCP, como Antigravity.',
-      'Idiomas: español nativo, inglés A1.'
+      'Idiomas: español nativo, inglés A1.',
+      'Cómo está hecho este chat: lo armé yo. La web es HTML/CSS/JS y el chat llama a una función serverless en Vercel que le pasa a Gemini mis datos (el mismo archivo que usa la web) y unas reglas: responder en primera persona, no inventar nada y ser honesto. La API key nunca llega al navegador.'
     ],
 
     // Preguntas sugeridas que aparecen en el chat
