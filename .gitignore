@@ -1,3 +1,6 @@
 node_modules
 .vercel
 .env*
+
+# Archivos que genera Claude en esta carpeta (tienen datos personales)
+Claude outputs/

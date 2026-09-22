@@ -131,6 +131,19 @@
   var history = []; // { role: 'user' | 'model', text }
   var busy = false;
 
+  // Convierte la respuesta del bot en HTML seguro: primero escapo todo,
+  // después transformo solo lo que yo controlo ([[CV]], **negrita** y links).
+  function renderBot(text) {
+    var html = esc(text)
+      .replace(/\*\*(.+?)\*\*/g, '<b>$1</b>')
+      .replace(/(https?:\/\/[^\s<]+[^\s<.,)])/g, '<a href="$1" target="_blank" rel="noopener">$1</a>');
+    if (P.cv) {
+      html = html.replace(/\[\[CV\]\]/g,
+        '<a class="msg-cta" href="' + esc(P.cv) + '" download>Descargalo acá ↓</a>');
+    }
+    return html;
+  }
+
   function addMsg(kind, text) {
     var el = document.createElement('div');
     el.className = 'msg msg--' + kind;
@@ -170,7 +183,7 @@
     typing.innerHTML = '<span class="typing"><i></i><i></i><i></i></span>';
     try {
       var data = await post({ mode: 'chat', message: text, history: history });
-      typing.textContent = data.reply;
+      typing.innerHTML = renderBot(data.reply);
       history.push({ role: 'user', text: text }, { role: 'model', text: data.reply });
     } catch (err) {
       typing.className = 'msg msg--error';
