@@ -112,6 +112,7 @@
   $('#education').innerHTML = P.education.map(function (e) { return '<li>' + esc(e) + '</li>'; }).join('');
   $('#contactLinks').innerHTML =
     '<a class="btn btn--primary" href="mailto:' + esc(P.email) + '">' + esc(P.email) + '</a>' +
+    (P.cv ? '<a class="btn btn--ghost" href="' + esc(P.cv) + '" download>Descargar CV ↓</a>' : '') +
     '<a class="btn btn--ghost" href="' + esc(P.linkedin) + '" target="_blank" rel="noopener">LinkedIn ↗</a>' +
     '<a class="btn btn--ghost" href="' + esc(P.github) + '" target="_blank" rel="noopener">GitHub ↗</a>';
 

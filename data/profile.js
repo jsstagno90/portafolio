@@ -15,6 +15,8 @@
     email: 'jsstagno@hotmail.com',
     github: 'https://github.com/jsstagno90',
     linkedin: 'https://www.linkedin.com/in/juan-stagno',
+    cv: 'cv/CV_Juan_Stagno.pdf',   // CV para descargar (versión web, sin teléfono)
+    site: 'https://portafolio-seven-theta-36.vercel.app',
     seniority: 'Junior',
     english: 'Básico (A1)',
 
