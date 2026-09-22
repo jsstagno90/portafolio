@@ -112,6 +112,7 @@
   $('#education').innerHTML = P.education.map(function (e) { return '<li>' + esc(e) + '</li>'; }).join('');
   $('#contactLinks').innerHTML =
     '<a class="btn btn--primary" href="mailto:' + esc(P.email) + '">' + esc(P.email) + '</a>' +
+    (P.whatsapp ? '<a class="btn btn--ghost" href="https://wa.me/' + esc(P.whatsapp) + '?text=' + encodeURIComponent('Hola Juan! Vengo de tu portfolio.') + '" target="_blank" rel="noopener">WhatsApp ↗</a>' : '') +
     (P.cv ? '<a class="btn btn--ghost" href="' + esc(P.cv) + '" download>Descargar CV ↓</a>' : '') +
     '<a class="btn btn--ghost" href="' + esc(P.linkedin) + '" target="_blank" rel="noopener">LinkedIn ↗</a>' +
     '<a class="btn btn--ghost" href="' + esc(P.github) + '" target="_blank" rel="noopener">GitHub ↗</a>';
@@ -137,6 +138,11 @@
     var html = esc(text)
       .replace(/\*\*(.+?)\*\*/g, '<b>$1</b>')
       .replace(/(https?:\/\/[^\s<]+[^\s<.,)])/g, '<a href="$1" target="_blank" rel="noopener">$1</a>');
+    if (P.whatsapp) {
+      var waText = encodeURIComponent('Hola Juan! Vengo de tu portfolio y me gustaría charlar con vos.');
+      html = html.replace(/\[\[WA\]\]/g,
+        '<a class="msg-cta msg-cta--wa" href="https://wa.me/' + esc(P.whatsapp) + '?text=' + waText + '" target="_blank" rel="noopener">Escribime por WhatsApp</a>');
+    }
     if (P.cv) {
       html = html.replace(/\[\[CV\]\]/g,
         '<a class="msg-cta" href="' + esc(P.cv) + '" download>Descargalo acá ↓</a>');

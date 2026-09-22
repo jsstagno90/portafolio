@@ -15,6 +15,7 @@
     email: 'jsstagno@hotmail.com',
     github: 'https://github.com/jsstagno90',
     linkedin: 'https://www.linkedin.com/in/juan-stagno',
+    whatsapp: '5492914680689',     // formato wa.me: 549 + característica + número, sin 0 ni 15
     cv: 'cv/CV_Juan_Stagno.pdf',   // CV para descargar (versión web, sin teléfono)
     site: 'https://portafolio-seven-theta-36.vercel.app',
     seniority: 'Junior',
