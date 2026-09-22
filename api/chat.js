@@ -129,11 +129,24 @@ async function callModel(model, apiKey, body) {
     body = JSON.parse(JSON.stringify(body));
     delete body.generationConfig.thinkingConfig;
   }
-  var res = await fetch(url, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey },
-    body: JSON.stringify(body)
-  });
+  // Si un modelo tarda más de 9s, lo corto y paso al siguiente (mejor que dejar esperando).
+  var ctrl = new AbortController();
+  var timer = setTimeout(function () { ctrl.abort(); }, 9000);
+  var res;
+  try {
+    res = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey },
+      body: JSON.stringify(body),
+      signal: ctrl.signal
+    });
+  } catch (e) {
+    var tErr = new Error('Gemini ' + model + ' timeout/red: ' + e.message);
+    tErr.status = 503;
+    throw tErr;
+  } finally {
+    clearTimeout(timer);
+  }
   if (!res.ok) {
     var errText = await res.text();
     var err = new Error('Gemini ' + model + ' ' + res.status + ': ' + errText.slice(0, 300));

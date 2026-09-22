@@ -26,14 +26,22 @@
       throw new Error('El asistente funciona cuando la web está publicada (Vercel o "vercel dev").');
     }
     var res;
+    // Si en 30s no hay respuesta, corto y aviso en vez de dejar los puntitos para siempre
+    var ctrl = new AbortController();
+    var timer = setTimeout(function () { ctrl.abort(); }, 30000);
     try {
       res = await fetch(API, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body)
+        body: JSON.stringify(body),
+        signal: ctrl.signal
       });
     } catch (e) {
-      throw new Error('No me pude conectar con el asistente.');
+      throw new Error(e.name === 'AbortError'
+        ? 'Tardé demasiado en responder, ¿me lo preguntás de nuevo?'
+        : 'No me pude conectar con el asistente.');
+    } finally {
+      clearTimeout(timer);
     }
     var data = null;
     try { data = await res.json(); } catch (e) { /* respuesta no JSON */ }

@@ -25,8 +25,9 @@
       'Construyo apps web que resuelven problemas de negocios reales, y les sumo IA donde de verdad ahorra trabajo.',
 
     about: [
-      'Hace más de 15 años que diseño y opero máquinas CNC en Artesalandia, un emprendimiento de productos en MDF y polifán. Ahí aprendí algo que hoy aplico al código: antes de cortar, medís dos veces.',
-      'Mi interés por programar arrancó en 2010 con un curso de PHP. Después me certifiqué como Full Stack en la UTN, hice AI Automation y terminé Full Stack en SoyHenry. Hoy me estoy especializando como AI Engineer y trabajo en proyectos con clientes reales.',
+      'Las computadoras me apasionan desde chico: a los 10 años ya armaba las mías, y a los 13 monté un cyber entero de 35 PCs.',
+      'No pude estudiar hasta 2022, cuando por fin arranqué: me certifiqué como Full Stack en la UTN, hice AI Automation y terminé Full Stack en SoyHenry. Hoy me estoy especializando como AI Engineer.',
+      'En paralelo, hace más de 15 años que diseño y opero máquinas CNC en Artesalandia, mi emprendimiento de productos en MDF y polifán. Ahí aprendí algo que hoy aplico al código: antes de cortar, medís dos veces.',
       'Me considero Junior: nunca trabajé formalmente como programador antes de este año. Lo que sí tengo es obsesión por entender por qué funciona lo que hago, y proyectos en producción que lo demuestran.'
     ],
 
