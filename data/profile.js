@@ -12,7 +12,7 @@
     nickname: 'Pity',
     role: 'Full Stack Developer · AI Automation',
     location: 'Bahía Blanca, Argentina (remoto)',
-    email: 'jsstagno@gmail.com',
+    email: 'jsstagno@hotmail.com',
     github: 'https://github.com/jsstagno90',
     linkedin: 'https://www.linkedin.com/in/juan-stagno',
     seniority: 'Junior',
@@ -29,7 +29,7 @@
 
     stack: {
       'Fuerte': ['React', 'TypeScript', 'JavaScript', 'Node.js', 'Express', 'Supabase / PostgreSQL', 'n8n', 'APIs de LLMs (Gemini, OpenAI, Claude)'],
-      'Usado en proyectos': ['Next.js', 'Vite', 'Tailwind', 'Vitest', 'Zod', 'MongoDB', 'Vercel', 'Railway', 'Lovable', 'MCP (Model Context Protocol)'],
+      'Usado en proyectos': ['Next.js', 'Vite', 'Tailwind', 'Vitest', 'Zod', 'MongoDB', 'Airtable', 'Webhooks', 'Vercel', 'Railway', 'Lovable', 'MCP (Model Context Protocol)', 'Agentes de IA', 'Git / GitHub', 'ClickUp / Kanban'],
       'Aprendiendo': ['Python', 'FastAPI', 'LangChain / RAG']
     },
 
@@ -53,11 +53,20 @@
           'Reconstruí su tienda online completa. Cuando evaluaban migrar a otra plataforma, les propuse escalar la que ya teníamos e integrar su futuro sistema de gestión por API. Aceptaron.'
       },
       {
+        title: 'Colaborador de desarrollo web',
+        org: 'Proyecto independiente',
+        period: '2026 — actualidad',
+        summary:
+          'Apoyo a desarrolladores en tareas de React y Node.js, integraciones con Supabase, pruebas, mejoras de funcionalidades y resolución de incidencias.'
+      },
+      {
         title: 'Diseñador y operador CNC',
         org: 'Artesalandia',
         period: '2010 — actualidad',
         summary:
-          'Diseño de piezas, programación de máquinas y venta de productos propios. Ahora también le estoy construyendo su e-commerce.'
+          'Diseño y fabricación en CorelDRAW y Aspire, operación de router CNC y corte láser, catálogos y listas de precios, pedidos y atención al cliente. Ahora también le estoy construyendo su e-commerce.',
+        highlight:
+          'Antes tuve emprendimientos propios: un garage privado (2013–2016) y un puesto de comidas (2019–2021), donde manejaba gestión, ventas y caja.'
       }
     ],
 
@@ -139,15 +148,20 @@
         name: 'Servidor MCP para GitHub',
         kind: 'Proyecto integrador · IA + herramientas',
         summary:
-          'Servidor MCP (Model Context Protocol) en TypeScript que le da a un asistente de IA 8 herramientas para trabajar con GitHub: repos, issues y commits.',
-        stack: ['TypeScript', 'MCP', 'Octokit', 'Zod', 'Vitest'],
-        metrics: ['8 tools', 'Tests con mocks'],
+          'Servidor MCP (Model Context Protocol) en TypeScript que le da a un asistente de IA 8 herramientas para operar GitHub en lenguaje natural: crear, listar y obtener repos; crear, listar, actualizar y cerrar issues; listar commits.',
+        stack: ['TypeScript', 'Node.js', 'MCP SDK', 'Octokit', 'Zod', 'Vitest'],
+        metrics: ['8 tools', '10 archivos de tests', 'Arquitectura en capas'],
         repo: 'https://github.com/jsstagno90/ProyectoM5_JuanStagno',
         decisions: [
           {
             problem: 'Un modelo puede llamar a una herramienta con parámetros mal formados.',
             decision: 'Cada tool valida su entrada con Zod antes de tocar la API de GitHub.',
             why: 'Los errores se frenan en la puerta, con un mensaje claro, no a mitad de camino.'
+          },
+          {
+            problem: 'Si cada herramienta habla directo con GitHub, validar, manejar errores y testear se vuelve un caos.',
+            decision: 'Arquitectura en capas: tools → schemas (Zod) → handlers → Octokit → GitHub API, con manejo de errores centralizado.',
+            why: 'Cada capa hace una sola cosa, y los errores de GitHub se traducen a mensajes claros en un solo lugar.'
           },
           {
             problem: 'Testear contra la API real es lento, frágil y gasta rate limit.',
@@ -228,6 +242,18 @@
           }
         ]
       }
+    ],
+
+    // Otros proyectos: no tienen tarjeta en la web, pero el bot los conoce
+    otherProjects: [
+      'Smart Toy Store Platform (proyecto final en SoyHenry): juguetería online con sistema de cotizaciones, sincronización de precios y stock en tiempo real entre Airtable y Supabase con n8n, y un chatbot con agente de IA.'
+    ],
+
+    // Contexto extra para el bot (sale de mi CV). No se muestra en la web.
+    botNotes: [
+      'Busco una primera oportunidad formal como desarrollador para aportar mi base técnica y seguir creciendo en equipo.',
+      'El servidor MCP lo probé con clientes de IA compatibles con MCP, como Antigravity.',
+      'Idiomas: español nativo, inglés A1.'
     ],
 
     // Preguntas sugeridas que aparecen en el chat

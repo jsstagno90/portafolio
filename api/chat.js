@@ -52,6 +52,8 @@ function profileAsText() {
   out.push('');
   out.push('FORMACIÓN:\n- ' + p.education.join('\n- '));
   out.push('');
+  if (p.otherProjects) out.push('OTROS PROYECTOS (sin tarjeta en la web):\n- ' + p.otherProjects.join('\n- ') + '\n');
+  if (p.botNotes) out.push('MÁS CONTEXTO:\n- ' + p.botNotes.join('\n- ') + '\n');
   out.push('PROYECTOS:');
   p.projects.forEach(function (pr) {
     out.push('### ' + pr.name + ' (id: ' + pr.id + ') — ' + pr.kind);
