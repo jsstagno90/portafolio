@@ -138,10 +138,14 @@
     var html = esc(text)
       .replace(/\*\*(.+?)\*\*/g, '<b>$1</b>')
       .replace(/(https?:\/\/[^\s<]+[^\s<.,)])/g, '<a href="$1" target="_blank" rel="noopener">$1</a>');
+    var mailHref = 'mailto:' + P.email + '?subject=' + encodeURIComponent('Agendemos un meet') +
+      '&body=' + encodeURIComponent('Hola Juan! Vi tu portfolio y me gustaría agendar una charla.');
+    html = html.replace(/\[\[MAIL\]\]/g,
+      '<a class="msg-cta" href="' + esc(mailHref) + '">Agendemos un meet ✉</a>');
     if (P.whatsapp) {
       var waText = encodeURIComponent('Hola Juan! Vengo de tu portfolio y me gustaría charlar con vos.');
       html = html.replace(/\[\[WA\]\]/g,
-        '<a class="msg-cta msg-cta--wa" href="https://wa.me/' + esc(P.whatsapp) + '?text=' + waText + '" target="_blank" rel="noopener">Escribime por WhatsApp</a>');
+        '<a class="msg-cta msg-cta--ghost" href="https://wa.me/' + esc(P.whatsapp) + '?text=' + waText + '" target="_blank" rel="noopener">Escribime por WhatsApp</a>');
     }
     if (P.cv) {
       html = html.replace(/\[\[CV\]\]/g,
