@@ -11,8 +11,9 @@
 
 var PROFILE = require('../data/profile.js');
 
-// Único lugar a tocar si sale un modelo más nuevo.
-var GEMINI_MODEL = 'gemini-2.5-flash';
+// Modelos en orden de preferencia. Si el primero está saturado o se quedó
+// sin cuota gratis (429/503), pruebo con el siguiente antes de rendirme.
+var GEMINI_MODELS = ['gemini-2.5-flash', 'gemini-2.5-flash-lite', 'gemini-2.0-flash'];
 
 var MAX_MESSAGE = 1200;   // caracteres por pregunta
 var MAX_JOB = 6000;       // caracteres de una oferta de trabajo
@@ -120,8 +121,12 @@ var MATCH_RULES = [
   'Escribí en el idioma de la oferta. Si el texto no es un puesto de trabajo, devolvé fit "bajo" y explicalo en headline.'
 ].join('\n');
 
-async function callGemini(apiKey, body) {
-  var url = 'https://generativelanguage.googleapis.com/v1beta/models/' + GEMINI_MODEL + ':generateContent';
+async function callModel(model, apiKey, body) {
+  var url = 'https://generativelanguage.googleapis.com/v1beta/models/' + model + ':generateContent';
+  if (model.indexOf('2.5') === -1 && body.generationConfig && body.generationConfig.thinkingConfig) {
+    body = JSON.parse(JSON.stringify(body));
+    delete body.generationConfig.thinkingConfig;
+  }
   var res = await fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey },
@@ -129,11 +134,29 @@ async function callGemini(apiKey, body) {
   });
   if (!res.ok) {
     var errText = await res.text();
-    throw new Error('Gemini ' + res.status + ': ' + errText.slice(0, 300));
+    var err = new Error('Gemini ' + model + ' ' + res.status + ': ' + errText.slice(0, 300));
+    err.status = res.status;
+    throw err;
   }
   var data = await res.json();
   var parts = data && data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts;
   return parts ? parts.map(function (p) { return p.text || ''; }).join('') : '';
+}
+
+async function callGemini(apiKey, body) {
+  var lastErr;
+  for (var i = 0; i < GEMINI_MODELS.length; i++) {
+    try {
+      return await callModel(GEMINI_MODELS[i], apiKey, body);
+    } catch (err) {
+      lastErr = err;
+      console.error(err.message);
+      // Solo paso al siguiente modelo si el problema es de capacidad/cuota
+      // o de un modelo que no existe más. Si la key es inválida, no tiene sentido.
+      if ([404, 429, 500, 503].indexOf(err.status) === -1) break;
+    }
+  }
+  throw lastErr;
 }
 
 module.exports = async function handler(req, res) {
@@ -201,6 +224,9 @@ module.exports = async function handler(req, res) {
     return res.status(200).json({ reply: reply.trim() || 'No pude armar una respuesta, ¿probás de nuevo?' });
   } catch (err) {
     console.error(err);
+    if (err.status === 429) {
+      return res.status(429).json({ error: 'Hoy recibí muchas preguntas y se me agotó la cuota gratis de IA. Probá más tarde.' });
+    }
     return res.status(502).json({ error: 'El asistente tuvo un problema. Probá de nuevo en un rato.' });
   }
 };
