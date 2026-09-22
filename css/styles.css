@@ -310,5 +310,7 @@ strong { color: var(--text); font-weight: 600; }
 .msg a { color: var(--accent); word-break: break-all; }
 .msg .msg-cta { display: inline-block; margin-top: 6px; padding: 8px 14px; border-radius: 999px; background: var(--accent); color: var(--accent-ink); font-weight: 600; text-decoration: none; word-break: normal; }
 .msg .msg-cta:hover { filter: brightness(1.08); }
-.msg .msg-cta--ghost { background: transparent; color: var(--text); border: 1px solid var(--line); }
-.msg .msg-cta--ghost:hover { border-color: #25d366; color: #25d366; }
+/* WhatsApp: su verde característico */
+.msg .msg-cta--wa, .btn--wa { background: #25d366; color: #fff; display: inline-flex; align-items: center; gap: 8px; }
+.msg .msg-cta--wa:hover, .btn--wa:hover { background: #1ebe5b; }
+.wa-ico { flex: none; }
