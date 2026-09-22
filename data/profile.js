@@ -23,7 +23,7 @@
 
     about: [
       'Hace más de 15 años que diseño y opero máquinas CNC en Artesalandia, un emprendimiento de productos en MDF y polifán. Ahí aprendí algo que hoy aplico al código: antes de cortar, medís dos veces.',
-      'Mi interés por programar arrancó en 2010 con un curso de PHP. Después me certifiqué como Full Stack en la UTN, hice AI Automation en SoyHenry y hoy trabajo en proyectos con clientes reales.',
+      'Mi interés por programar arrancó en 2010 con un curso de PHP. Después me certifiqué como Full Stack en la UTN, hice AI Automation y terminé Full Stack en SoyHenry. Hoy me estoy especializando como AI Engineer y trabajo en proyectos con clientes reales.',
       'Me considero Junior: nunca trabajé formalmente como programador antes de este año. Lo que sí tengo es obsesión por entender por qué funciona lo que hago, y proyectos en producción que lo demuestran.'
     ],
 
@@ -64,8 +64,8 @@
     education: [
       'Full Stack Developer — UTN (certificado, 2022–2023)',
       'AI Automation — SoyHenry (2025–2026)',
-      'Full Stack Developer — SoyHenry (en curso)',
-      'Bootcamp IA Generativa: LLM Apps, agentes, LangChain (en curso)'
+      'Full Stack Developer — SoyHenry (completo)',
+      'AI Engineer — bootcamp (en curso)'
     ],
 
     // -----------------------------------------------------------------------
