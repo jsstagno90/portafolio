@@ -306,3 +306,7 @@ strong { color: var(--text); font-weight: 600; }
 }
 .chat__chips[hidden], .match__result[hidden] { display: none; }
 .ai-badge { font: 600 .65rem var(--mono); padding: 2px 6px; border-radius: 5px; background: var(--accent-soft); color: var(--accent); vertical-align: middle; margin-left: 4px; }
+
+.msg a { color: var(--accent); word-break: break-all; }
+.msg .msg-cta { display: inline-block; margin-top: 6px; padding: 8px 14px; border-radius: 999px; background: var(--accent); color: var(--accent-ink); font-weight: 600; text-decoration: none; word-break: normal; }
+.msg .msg-cta:hover { filter: brightness(1.08); }
