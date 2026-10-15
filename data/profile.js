@@ -10,7 +10,7 @@
   var PROFILE = {
     name: 'Juan Stagno',
     nickname: 'Pity',
-    role: 'Full Stack Developer · AI Automation',
+    role: 'AI Automation Engineer · Full Stack Developer',
     location: 'Bahía Blanca, Argentina (remoto)',
     email: 'jsstagno@hotmail.com',
     github: 'https://github.com/jsstagno90',
@@ -18,7 +18,6 @@
     whatsapp: '5492914680689',     // formato wa.me: 549 + característica + número, sin 0 ni 15
     cv: 'cv/CV_Juan_Stagno.pdf',   // CV para descargar (versión web, sin teléfono)
     site: 'https://portafolio-seven-theta-36.vercel.app',
-    seniority: 'Junior',
     english: 'Básico (A1)',
 
     tagline:
@@ -26,15 +25,14 @@
 
     about: [
       'Las computadoras me apasionan desde chico: a los 10 años ya armaba las mías, y a los 13 monté un cyber entero de 35 PCs.',
-      'No pude estudiar hasta 2022, cuando por fin arranqué: me certifiqué como Full Stack en la UTN, hice AI Automation y terminé Full Stack en SoyHenry. Hoy me estoy especializando como AI Engineer.',
+      'No pude estudiar hasta 2022, cuando por fin arranqué: me certifiqué como Full Stack en la UTN, hice AI Automation y terminé Full Stack en SoyHenry. Hoy sumo AI Engineering en Coderhouse.',
       'En paralelo, hace más de 15 años que diseño y opero máquinas CNC en Artesalandia, mi emprendimiento de productos en MDF y polifán. Ahí aprendí algo que hoy aplico al código: antes de cortar, medís dos veces.',
-      'Me considero Junior: nunca trabajé formalmente como programador antes de este año. Lo que sí tengo es obsesión por entender por qué funciona lo que hago, y proyectos en producción que lo demuestran.'
+      'Hoy trabajo como desarrollador en PR Tech AI y en Nateco, con código en producción y en equipo: ramas, Pull Requests, code review y dailies. Me obsesiona entender por qué funciona lo que hago, y lo demuestro con proyectos reales.'
     ],
 
     stack: {
       'Fuerte': ['React', 'TypeScript', 'JavaScript', 'Node.js', 'Express', 'Supabase / PostgreSQL', 'n8n', 'APIs de LLMs (Gemini, OpenAI, Claude)'],
-      'Usado en proyectos': ['Next.js', 'Vite', 'Tailwind', 'Vitest', 'Zod', 'MongoDB', 'Airtable', 'Webhooks', 'Vercel', 'Railway', 'Lovable', 'MCP (Model Context Protocol)', 'Agentes de IA', 'Git / GitHub', 'ClickUp / Kanban'],
-      'Aprendiendo': ['Python', 'FastAPI', 'LangChain / RAG']
+      'Usado en proyectos': ['Next.js', 'Vite', 'Tailwind', 'Vitest', 'Zod', 'MongoDB', 'Airtable', 'Webhooks', 'Vercel', 'Railway', 'Lovable', 'MCP (Model Context Protocol)', 'Agentes de IA', 'Git / GitHub', 'ClickUp / Kanban']
     },
 
     experience: [
@@ -78,7 +76,7 @@
       'Full Stack Developer — UTN (certificado, 2022–2023)',
       'AI Automation — SoyHenry (2025–2026)',
       'Full Stack Developer — SoyHenry (completo)',
-      'AI Engineer — bootcamp (en curso)'
+      'AI Engineering — Coderhouse (2026 — actualidad)'
     ],
 
     // -----------------------------------------------------------------------
