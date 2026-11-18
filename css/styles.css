@@ -582,3 +582,80 @@ textarea, .chat__form input { font-family: var(--font); }
   *, *::before, *::after { animation: none !important; transition: none !important; }
   html { scroll-behavior: auto; }
 }
+
+/* ==========================================================================
+   Agente en vivo
+   ========================================================================== */
+.agent { display: grid; grid-template-columns: 1fr 1.1fr; gap: 20px; align-items: stretch; }
+.agent__chat { display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--line); border-radius: 24px; overflow: hidden; backdrop-filter: blur(10px); height: 620px; }
+.agent__head { display: flex; align-items: center; gap: 12px; padding: 14px 18px; border-bottom: 1px solid var(--line); }
+.agent__head p { margin: 0; }
+.agent__head strong { font-weight: 550; }
+.agent__avatar { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 12px; flex: none;
+  background: linear-gradient(135deg, #c0783c, #5b3a29); color: #fff; font-family: var(--serif); font-style: italic; font-size: 1.35rem; }
+.agent__msgs { flex: 1; overflow-y: auto; padding: 18px; display: flex; flex-direction: column; gap: 10px; }
+.agent__msgs .msg { max-width: 88%; }
+.agent__chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 16px 12px; }
+.agent__chips[hidden] { display: none; }
+.agent__form { padding: 14px; }
+
+.agent__trace .term { height: 620px; display: flex; flex-direction: column; }
+.term__bar .trace__stats { margin-left: auto; font: .7rem var(--mono); color: var(--faint); }
+.trace { flex: 1; overflow-y: auto; padding: 16px 18px; display: grid; align-content: start; gap: 14px; }
+.trace__empty { color: var(--muted); font-size: .9rem; }
+.trace__empty p { margin: 0 0 12px; }
+.toolbox { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.toolbox li { display: flex; align-items: baseline; gap: 12px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface-2); }
+.toolbox code { font: 500 .8rem var(--mono); color: var(--accent); }
+.toolbox span { font-size: .8rem; color: var(--muted); }
+
+.t-group { display: grid; gap: 8px; animation: pop .35s var(--ease); }
+.t-title { margin: 0; font: 500 .76rem var(--mono); color: var(--accent); }
+.t-step {
+  display: grid; grid-template-columns: 20px 1fr; gap: 10px; align-items: start; padding: 10px 12px;
+  border: 1px solid var(--line); border-radius: 12px; background: var(--surface-2); font-size: .84rem; line-height: 1.5;
+  opacity: 0; transform: translateY(6px); transition: opacity .35s var(--ease), transform .35s var(--ease);
+}
+.t-step.in { opacity: 1; transform: none; }
+.t-step code { font: 500 .78rem var(--mono); color: var(--accent); }
+.t-ico { font-size: .8rem; text-align: center; line-height: 1.6; color: var(--faint); }
+.t-model .t-ico { color: var(--accent-2); }
+.t-tool { border-color: color-mix(in srgb, var(--accent) 30%, var(--line)); margin-left: 18px; }
+.t-tool .t-ico { color: var(--accent); }
+.t-tool--err { border-color: color-mix(in srgb, var(--bad) 40%, var(--line)); }
+.t-tool--err .t-ico { color: var(--bad); }
+.t-done { border-color: color-mix(in srgb, var(--good) 35%, var(--line)); background: color-mix(in srgb, var(--good) 6%, transparent); }
+.t-done .t-ico { color: var(--good); }
+.t-wait { color: var(--muted); align-items: center; }
+.t-wait .spinner { width: 14px; height: 14px; }
+.t-body { min-width: 0; }
+.t-call { font: .76rem/1.55 var(--mono); color: var(--text); word-break: break-word; }
+.t-k { color: var(--muted); }
+.t-v { color: var(--warm); }
+.t-res { margin-top: 4px; color: var(--muted); font-size: .8rem; }
+.t-res b { color: var(--text); font-weight: 550; }
+.t-ok { color: var(--good); }
+.t-err { color: var(--bad); }
+.t-meta { margin-top: 3px; font: .66rem var(--mono); color: var(--faint); }
+
+/* Ticket del pedido */
+.msg--ticket { padding: 0; background: transparent; border: 0; max-width: 92%; }
+.ticket {
+  width: 300px; max-width: 100%; padding: 16px 18px 14px; border-radius: 14px; background: #fbf7f0; color: #2b1d14;
+  font: .8rem/1.5 var(--mono); white-space: normal; box-shadow: 0 18px 40px -18px rgba(0, 0, 0, .6);
+  -webkit-mask: radial-gradient(circle 6px at 50% 100%, transparent 98%, #000) bottom / 16px 100% repeat-x;
+  mask: radial-gradient(circle 6px at 50% 100%, transparent 98%, #000) 0 0 / 16px 100% repeat-x;
+}
+.tk-head { display: flex; justify-content: space-between; padding-bottom: 8px; margin-bottom: 8px; border-bottom: 1px dashed #c9b9a6; font-weight: 600; }
+.ticket table { width: 100%; border-collapse: collapse; }
+.ticket td { padding: 2px 0; vertical-align: top; }
+.ticket td:last-child { text-align: right; white-space: nowrap; padding-left: 10px; }
+.tk-disc td { color: #2f7a4f; }
+.tk-total { display: flex; justify-content: space-between; margin-top: 8px; padding-top: 8px; border-top: 1px dashed #c9b9a6; font-size: .95rem; }
+.tk-foot { margin: 10px 0 4px; font-size: .68rem; color: #8a7462; text-align: center; }
+
+@media (max-width: 980px) {
+  .agent { grid-template-columns: 1fr; }
+  .agent__chat { height: 560px; }
+  .agent__trace .term { height: 480px; }
+}

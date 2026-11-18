@@ -30,11 +30,15 @@
   }, { passive: true });
 
   // ---------- en el celu, el botón flotante no tapa el chat de la demo ----------
-  var ragChat = document.getElementById('ragChat');
-  if (ragChat && 'IntersectionObserver' in window) {
-    new IntersectionObserver(function (entries) {
-      document.body.classList.toggle('fab-off', entries[0].isIntersecting);
-    }).observe(ragChat);
+  // (también en el agente). Llevo la cuenta de cuáles se ven en pantalla.
+  var fabZones = ['ragChat', 'agMsgs', 'agTrace'].map(function (id) { return document.getElementById(id); }).filter(Boolean);
+  if (fabZones.length && 'IntersectionObserver' in window) {
+    var showing = new Set();
+    var fo = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) showing.add(e.target); else showing.delete(e.target); });
+      document.body.classList.toggle('fab-off', showing.size > 0);
+    });
+    fabZones.forEach(function (el) { fo.observe(el); });
   }
 
   // ---------- animación del hero ----------

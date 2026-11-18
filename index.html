@@ -32,6 +32,7 @@
       <a href="#top" class="nav__logo" aria-label="Inicio"><span class="nav__mark">js</span>stagno</a>
       <nav class="nav__links" aria-label="Secciones">
         <a href="#crea-tu-bot">Creá tu bot</a>
+        <a href="#agente">Agente</a>
         <a href="#proyectos">Proyectos</a>
         <a href="#match">¿Encajo?</a>
         <a href="#experiencia">Experiencia</a>
@@ -56,6 +57,7 @@
           <button class="btn btn--ghost" data-open-chat>Chateá con mi versión IA</button>
         </div>
         <p class="hero__links small">
+          <a href="#agente">Probá el agente</a><span aria-hidden="true">·</span>
           <a href="#match">¿Encajo en tu búsqueda?</a><span aria-hidden="true">·</span>
           <a href="cv/CV_Juan_Stagno.pdf" download>Descargar CV</a>
         </p>
@@ -180,6 +182,77 @@
       </details>
     </section>
 
+    <!-- AGENTE EN VIVO (function calling) -->
+    <section id="agente" class="section wrap">
+      <header class="section__head section__head--center reveal">
+        <p class="eyebrow">Demo en vivo · Agente con herramientas</p>
+        <h2>Un agente que <em class="serif grad">actúa</em></h2>
+        <p class="muted">Brasita no solo responde: busca en el catálogo, cotiza con las promos, calcula el envío y arma el pedido. Al lado ves <strong>cada herramienta que decide usar</strong>, con qué datos la llama y qué le devuelve.</p>
+      </header>
+
+      <div class="agent reveal">
+        <div class="agent__chat spot">
+          <div class="agent__head">
+            <span class="agent__avatar" aria-hidden="true">B</span>
+            <div><strong>Brasita</strong> <span class="ai-badge">AGENTE</span><p class="small muted">Vendedora de Brasa Tostadores · empresa ficticia</p></div>
+          </div>
+          <div class="agent__msgs" id="agMsgs" aria-live="polite"></div>
+          <div class="agent__chips" id="agChips"></div>
+          <form class="chat__form agent__form" id="agForm">
+            <label for="agInput" class="sr-only">Tu mensaje para el agente</label>
+            <input id="agInput" autocomplete="off" maxlength="600" placeholder="Pedile algo a Brasita…">
+            <button class="btn btn--primary btn--sm" type="submit">Enviar</button>
+          </form>
+        </div>
+
+        <aside class="agent__trace" aria-label="Traza del agente">
+          <div class="term">
+            <div class="term__bar"><span class="demo__dots"><i></i><i></i><i></i></span><em>agent.trace</em><span class="trace__stats" id="agStats"></span></div>
+            <div class="trace" id="agTrace">
+              <div class="trace__empty">
+                <p>El agente tiene <b>5 herramientas</b>. Decide cuáles usar según lo que le pidas:</p>
+                <ul class="toolbox">
+                  <li><code>buscar_productos</code><span>catálogo, precios y stock</span></li>
+                  <li><code>cotizar</code><span>total con promociones</span></li>
+                  <li><code>calcular_envio</code><span>costo y demora por destino</span></li>
+                  <li><code>info_local</code><span>horarios, pagos y cambios</span></li>
+                  <li><code>crear_pedido</code><span>solo si confirmás</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <details class="rag__how reveal">
+        <summary>Cómo funciona el agente</summary>
+        <div class="rag__how-body">
+          <ol class="how">
+            <li><b>Le doy herramientas, no respuestas.</b> Al modelo (<code>gemini-2.5-flash</code>) le paso tu mensaje y la descripción de 5 funciones (nombre, para qué sirve y qué parámetros recibe), usando <i>function calling</i>.</li>
+            <li><b>El modelo decide.</b> En vez de contestar, puede devolver "quiero llamar a <code>cotizar</code> con estos ítems". Puede pedir varias a la vez.</li>
+            <li><b>El servidor ejecuta.</b> La función serverless (<code>/api/agent</code>) corre la herramienta de verdad y le devuelve el resultado al modelo.</li>
+            <li><b>Se repite el loop</b> (pensar → llamar herramienta → leer resultado) hasta que el modelo tiene todo para responder, con un máximo de 6 vueltas para que nunca quede girando.</li>
+          </ol>
+          <h4>Decisiones técnicas</h4>
+          <div class="decision"><dl>
+            <dt class="p">Problema</dt><dd>Un LLM puede equivocarse en una cuenta o "inventar" un descuento.</dd>
+            <dt class="d">Decisión</dt><dd>El modelo nunca calcula: precios, promos, envío y total salen de funciones en el servidor.</dd>
+            <dt class="w">Por qué</dt><dd>La IA elige qué hacer; las reglas del negocio viven en código, donde no se pueden manipular desde el chat.</dd>
+          </dl></div>
+          <div class="decision"><dl>
+            <dt class="p">Problema</dt><dd>Un agente que actúa solo puede crear un pedido que el cliente no quería.</dd>
+            <dt class="d">Decisión</dt><dd><code>crear_pedido</code> exige <code>cliente_confirmo: true</code> y valida stock y medio de pago. Si falta algo, devuelve un error que el agente le explica al cliente.</dd>
+            <dt class="w">Por qué</dt><dd>La IA propone y la persona decide. Los errores de las herramientas guían al agente en vez de romper la charla.</dd>
+          </dl></div>
+          <div class="decision"><dl>
+            <dt class="p">Problema</dt><dd>Si el navegador manda el historial con los resultados de las herramientas, alguien podría falsificarlos.</dd>
+            <dt class="d">Decisión</dt><dd>Del historial solo viajan los textos; las herramientas se vuelven a ejecutar en el servidor cada vez.</dd>
+            <dt class="w">Por qué</dt><dd>Ningún precio ni stock que use el agente puede venir del cliente.</dd>
+          </dl></div>
+        </div>
+      </details>
+    </section>
+
     <!-- PROYECTOS -->
     <section id="proyectos" class="section wrap">
       <header class="section__head reveal">
@@ -290,6 +363,7 @@
   <script src="data/profile.js"></script>
   <script src="js/main.js"></script>
   <script src="js/rag.js"></script>
+  <script src="js/agent.js"></script>
   <script src="js/effects.js"></script>
 </body>
 </html>
