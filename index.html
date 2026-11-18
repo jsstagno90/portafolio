@@ -31,6 +31,7 @@
       <nav class="nav__links" aria-label="Secciones">
         <a href="#proyectos">Proyectos</a>
         <a href="#match">¿Encajo?</a>
+        <a href="#crea-tu-bot">Creá tu bot</a>
         <a href="#experiencia">Experiencia</a>
         <a href="#contacto">Contacto</a>
       </nav>
@@ -50,6 +51,7 @@
         <div class="hero__cta">
           <button class="btn btn--primary" data-open-chat>Chateá con mi versión IA</button>
           <a class="btn btn--ghost" href="#match">¿Encajo en tu búsqueda? →</a>
+          <a class="btn btn--ghost" href="#crea-tu-bot">Creá tu chatbot →</a>
           <a class="btn btn--ghost" href="cv/CV_Juan_Stagno.pdf" download>Descargar CV ↓</a>
         </div>
         <ul class="hero__stats" id="heroStats"></ul>
@@ -96,6 +98,89 @@
         </form>
       </div>
       <div class="match__result" id="matchResult" aria-live="polite" hidden></div>
+    </section>
+
+    <!-- CREÁ TU CHATBOT (demo RAG) -->
+    <section id="crea-tu-bot" class="section wrap">
+      <header class="section__head">
+        <p class="eyebrow mono">// demo RAG · AI engineering</p>
+        <h2>Creá tu propio chatbot</h2>
+        <p class="muted">Decile cómo tiene que actuar, subí tus documentos (catálogo, horarios, precios) y en segundos tenés un bot que responde <strong>solo con tu información</strong>. Al lado vas a ver el pipeline en vivo: cada paso, cada fragmento recuperado y el prompt que llega al modelo.</p>
+      </header>
+
+      <div class="rag">
+        <div class="rag__setup">
+          <div class="rag__step">
+            <label for="ragPersona" class="rag__label"><span class="rag__num mono">1</span> ¿Cómo querés que actúe?</label>
+            <textarea id="ragPersona" rows="4" maxlength="1500" placeholder="Ej: Sos el asistente de una librería de barrio. Respondé con buena onda, recomendá libros del catálogo y avisá los horarios si preguntan."></textarea>
+          </div>
+          <div class="rag__step">
+            <span class="rag__label"><span class="rag__num mono">2</span> Subí tus documentos</span>
+            <label class="drop" id="ragDrop" for="ragFiles">
+              <input type="file" id="ragFiles" accept=".pdf,.txt,.md,.csv" multiple>
+              <span><b>Arrastrá o elegí archivos</b><br><span class="muted small">PDF, TXT, MD o CSV · hasta 3 archivos de 5 MB</span></span>
+            </label>
+            <ul class="rag__files" id="ragFileList"></ul>
+          </div>
+          <div class="rag__actions">
+            <button class="link-btn" type="button" id="ragSample">¿Sin archivos a mano? Cargar el ejemplo de una librería</button>
+            <button class="btn btn--primary" type="button" id="ragBuild">Crear mi chatbot</button>
+          </div>
+          <p class="muted small rag__privacy">Tus documentos se procesan en tu navegador y no se guardan en ningún servidor. Al cerrar la página, el bot desaparece.</p>
+        </div>
+
+        <aside class="rag__pipe" aria-label="Pipeline en vivo">
+          <div class="term">
+            <div class="term__bar"><span></span><span></span><span></span><em class="mono">pipeline.log</em></div>
+            <div class="pipe" id="ragPipe" aria-live="polite">
+              <p class="pipe__empty mono">Esperando documentos…<br><span class="muted">extracción → chunking → embeddings → índice → búsqueda → respuesta</span></p>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="rag__chat" id="ragChat" hidden>
+        <div class="rag__chat-head">
+          <strong id="ragBotName">Tu chatbot</strong> <span class="ai-badge">RAG</span>
+          <span class="muted small" id="ragBotInfo"></span>
+        </div>
+        <div class="rag__msgs" id="ragMsgs"></div>
+        <form class="chat__form rag__form" id="ragForm">
+          <label for="ragInput" class="sr-only">Tu pregunta</label>
+          <input id="ragInput" autocomplete="off" maxlength="800" placeholder="Preguntale algo a tu bot…">
+          <button class="btn btn--primary btn--sm" type="submit">Enviar</button>
+        </form>
+      </div>
+
+      <details class="rag__how">
+        <summary>Cómo está programado</summary>
+        <div class="rag__how-body">
+          <ol class="how">
+            <li><b>Extracción.</b> El texto de los PDF se saca en el navegador con <code>pdf.js</code>; los TXT/MD/CSV se leen directo. Nada viaja todavía al servidor.</li>
+            <li><b>Chunking.</b> El texto se parte en fragmentos de ~700 caracteres respetando párrafos, con ~120 caracteres de solapamiento para no cortar una idea a la mitad.</li>
+            <li><b>Embeddings.</b> Los fragmentos van en lotes a una función serverless de Vercel (<code>/api/rag</code>), que llama a <code>gemini-embedding-001</code> con <code>taskType: RETRIEVAL_DOCUMENT</code>. Cada fragmento vuelve como un vector de 768 números, normalizado.</li>
+            <li><b>Índice vectorial.</b> Los vectores quedan en memoria, en tu navegador. Con unos cientos de fragmentos, buscar con fuerza bruta tarda menos de un milisegundo, así que no hace falta una base vectorial.</li>
+            <li><b>Retrieval.</b> Tu pregunta se convierte en vector (<code>RETRIEVAL_QUERY</code>) y se compara con todos los fragmentos por similitud coseno. Se quedan los 4 más parecidos.</li>
+            <li><b>Generación.</b> Al modelo (<code>gemini-2.5-flash</code>, con fallback a otros si está saturado) le llegan: tus instrucciones, reglas que no se pueden pisar ("respondé solo con los fragmentos, no inventes precios") y los fragmentos recuperados.</li>
+          </ol>
+          <h4 class="mono small muted">DECISIONES TÉCNICAS</h4>
+          <div class="decision"><dl>
+            <dt class="p">Problema</dt><dd>Guardar documentos de cualquier visitante en una base implica privacidad, limpieza y costo.</dd>
+            <dt class="d">Decisión</dt><dd>El vector store vive en el navegador; el servidor no guarda nada.</dd>
+            <dt class="w">Por qué</dt><dd>Para una demo con pocos documentos es más simple y más seguro. En producción lo pasaría a Supabase + pgvector, con un índice por cliente.</dd>
+          </dl></div>
+          <div class="decision"><dl>
+            <dt class="p">Problema</dt><dd>Un bot "abierto" puede inventar datos o usarse como ChatGPT gratis con mi API key.</dd>
+            <dt class="d">Decisión</dt><dd>Las reglas del sistema van por encima de las instrucciones del usuario, y hay límites de tamaño y rate limit por IP.</dd>
+            <dt class="w">Por qué</dt><dd>El bot dice "no tengo ese dato" antes que inventar un precio, y la key no se puede abusar.</dd>
+          </dl></div>
+          <div class="decision"><dl>
+            <dt class="p">Problema</dt><dd>La API key de Gemini no puede llegar al navegador.</dd>
+            <dt class="d">Decisión</dt><dd>Todo lo que usa la key (embeddings y generación) pasa por la función serverless.</dd>
+            <dt class="w">Por qué</dt><dd>La key vive en las variables de entorno de Vercel; el navegador solo ve vectores y respuestas.</dd>
+          </dl></div>
+        </div>
+      </details>
     </section>
 
     <!-- EXPERIENCIA -->
@@ -162,5 +247,6 @@
 
   <script src="data/profile.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/rag.js"></script>
 </body>
 </html>
