@@ -65,7 +65,7 @@
    Base
    ========================================================================== */
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+html { scroll-behavior: smooth; scroll-padding-top: 90px; overflow-x: clip; }
 body {
   margin: 0;
   background: var(--bg);
@@ -89,8 +89,10 @@ code { font-family: var(--mono); }
 .muted { color: var(--muted); }
 .small { font-size: .86rem; }
 .serif { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spacing: -0.01em; }
-h2 .serif { padding-right: .06em; }
-h1 .serif { padding-right: .02em; }
+/* Las letras itálicas (sobre todo la J) se dibujan fuera de su caja, y el degradé
+   (background-clip: text) solo pinta dentro de la caja: sin este padding, se cortan.
+   El margen negativo compensa el padding para que no cambie el espaciado. */
+.serif.grad { display: inline-block; padding: .12em .16em .16em .14em; margin: -.12em -.16em -.16em -.14em; }
 .grad { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .skip { position: absolute; left: -999px; top: 8px; background: var(--primary-bg); color: var(--primary-ink); padding: 8px 12px; border-radius: 8px; z-index: 100; }
@@ -205,7 +207,7 @@ h1 .serif { padding-right: .02em; }
 /* La animación del chatbot */
 .hero__demo { position: relative; }
 .hero__demo::before { /* halo detrás de la ventana */
-  content: ''; position: absolute; inset: 8% -4% -6% 6%; z-index: -1; border-radius: 40px;
+  content: ''; position: absolute; inset: 8% 0 -6% 6%; z-index: -1; border-radius: 40px;
   background: radial-gradient(60% 60% at 50% 40%, var(--glow-a), transparent 70%); filter: blur(30px);
 }
 .demo {
@@ -566,6 +568,8 @@ textarea, .chat__form input { font-family: var(--font); }
   .demo__row { grid-template-columns: 1fr; gap: 4px; }
   .demo__tiles { grid-template-columns: repeat(14, 1fr); gap: 4px; }
   .demo__steps { grid-template-columns: repeat(2, 1fr); }
+  .hits li { grid-template-columns: 36px auto 1fr; }
+  .hits summary { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   body.fab-off .chat-fab { opacity: 0; pointer-events: none; transform: translateY(20px); }
   .hero__stats { gap: 28px; }
   .chat { right: 8px; bottom: 8px; width: calc(100vw - 16px); height: calc(100dvh - 16px); }
