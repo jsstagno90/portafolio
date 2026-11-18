@@ -35,37 +35,32 @@
   var busy = false, questionCount = 0;
 
   // ---------- ejemplo precargado ----------
-  var SAMPLE_PERSONA = 'Sos "Tinta", el asistente virtual de la librería Páginas del Sur. Hablás con buena onda y en rioplatense. Recomendá libros del catálogo según lo que busque la persona, decí el precio y si hay stock. Si preguntan por horarios, envíos o pagos, respondé con esa info.';
+  var SAMPLE_NAME = 'brasa-tostadores.txt';
+  var SAMPLE_PERSONA = 'Sos "Brasita", el asistente virtual de Brasa Tostadores. Hablás en rioplatense, con buena onda y respuestas cortas. Recomendá cafés según el método que use la persona, decí precio y stock, y si quiere comprar contale cómo son los envíos y los pagos. Nunca inventes productos ni precios.';
   var SAMPLE_DOC = [
-    'LIBRERÍA PÁGINAS DEL SUR — Información general',
+    'BRASA TOSTADORES — Información de la empresa',
     '',
-    'Dirección: Av. Alem 1234, Bahía Blanca. Teléfono / WhatsApp: 291 555-0101.',
-    'Horarios: lunes a viernes de 9 a 13 y de 16 a 20. Sábados de 10 a 14. Domingos y feriados cerrado.',
-    'Medios de pago: efectivo (10% de descuento), transferencia, Mercado Pago y tarjetas de débito y crédito. Hasta 3 cuotas sin interés con tarjetas bancarias.',
-    'Envíos: dentro de Bahía Blanca, $3.500 (gratis en compras de más de $40.000), llegan en 24 a 48 hs. Al resto del país por Correo Argentino, entre 3 y 7 días hábiles; el costo depende del destino.',
-    'Retiro en el local: sin cargo, el pedido queda reservado 72 horas.',
-    'Cambios: dentro de los 30 días con el ticket y el libro en buen estado.',
-    'Encargos: si un libro no está en stock, lo pedimos a la editorial; demora entre 7 y 15 días y se pide una seña del 30%.',
+    'Tostaduría de café de especialidad de Bahía Blanca. Tostamos todas las semanas en pequeños lotes. Todos los cafés se venden en grano o molidos para tu método, sin costo extra.',
+    'Dirección: Calle Zelarrayán 845, Bahía Blanca. Horarios: lunes a viernes de 8 a 20, sábados de 9 a 14. Domingos y feriados cerrado.',
+    'Contacto: WhatsApp 291 555-0188, email hola@brasatostadores.com.ar, Instagram @brasa.tostadores.',
+    'Envíos: en Bahía Blanca, en moto en el día si comprás antes de las 13 hs; cuesta $3.000 y es gratis desde $45.000. Al resto del país por Andreani, de 3 a 6 días hábiles, gratis desde $90.000. Retiro en el local sin costo.',
+    'Medios de pago: efectivo en el local (10% de descuento), transferencia (5% de descuento), Mercado Pago y tarjetas. Hasta 3 cuotas sin interés con tarjetas de crédito bancarias en compras desde $30.000.',
+    'Cambios: los accesorios se cambian dentro de los 30 días sin uso. El café no tiene cambio, salvo que llegue dañado: avisanos en 48 hs con una foto y te lo reponemos.',
+    'Taller de métodos de filtrado: sábados a las 11 hs, 90 minutos, hasta 8 personas, $18.000 con un café de 250 g incluido. Se reserva por WhatsApp.',
     '',
-    'CATÁLOGO (título — autor — género — precio — stock)',
-    'Ficciones — Jorge Luis Borges — cuentos — $24.900 — 6 unidades',
-    'Rayuela — Julio Cortázar — novela — $28.500 — 3 unidades',
-    'El túnel — Ernesto Sabato — novela — $16.900 — 8 unidades',
-    'Las aventuras de la China Iron — Gabriela Cabezón Cámara — novela — $22.000 — 2 unidades',
-    'Nuestra parte de noche — Mariana Enriquez — terror — $39.900 — 4 unidades',
-    'Las cosas que perdimos en el fuego — Mariana Enriquez — cuentos de terror — $21.500 — sin stock (se puede encargar)',
-    'Cien años de soledad — Gabriel García Márquez — novela — $31.000 — 5 unidades',
-    'El principito — Antoine de Saint-Exupéry — infantil — $12.900 — 10 unidades',
-    'Harry Potter y la piedra filosofal — J. K. Rowling — juvenil / fantasía — $27.900 — 7 unidades',
-    'Sapiens — Yuval Noah Harari — ensayo / historia — $33.500 — 3 unidades',
-    'Hábitos atómicos — James Clear — autoayuda — $26.900 — 9 unidades',
-    'El Eternauta (edición integral) — Oesterheld y Solano López — historieta — $45.000 — 2 unidades',
-    'Mafalda: todas las tiras — Quino — historieta / humor — $49.900 — 4 unidades',
-    'Clean Code — Robert C. Martin — programación — $52.000 — 1 unidad',
+    'CATÁLOGO (producto — descripción — presentación — precio — stock)',
+    'Etiopía Yirgacheffe — tueste claro, notas florales, a jazmín y limón, ideal para filtro (V60, Chemex) — 250 g — $14.500 — 18 unidades',
+    'Colombia Huila — tueste medio, notas a caramelo, manzana roja y chocolate con leche, muy versátil — 250 g — $12.900 — 25 unidades',
+    'Brasil Cerrado — tueste medio-oscuro, notas a maní, cacao y nuez, ideal para espresso y con leche — 500 g — $19.800 — 30 unidades',
+    'Blend Brasa de la Casa — Brasil + Colombia, cuerpo intenso y dulzor a dulce de leche, el más vendido — 1 kg — $34.900 — 40 unidades',
+    'Descafeinado Suave — Colombia descafeinado por proceso de agua, notas a cacao y vainilla — 250 g — $13.900 — sin stock, vuelve la semana próxima (se puede reservar)',
+    'Prensa francesa 600 ml — vidrio borosilicato y filtro de acero, rinde 3 tazas — $24.500 — 7 unidades',
+    'Molinillo manual cerámico — muelas cerámicas regulables de fina a gruesa — $38.900 — 5 unidades',
+    'Kit V60 inicial — gotero V60 + 40 filtros + cuchara medidora + guía de recetas — $29.900 — 9 unidades',
+    'Taza Brasa esmaltada — cerámica artesanal de Bahía Blanca, 300 ml — $11.500 — 15 unidades',
+    'Suscripción Brasa Club — 2 cafés distintos de 250 g por mes elegidos por el tostador, se cancela cuando quieras — $24.900 por mes',
     '',
-    'PROMOCIONES',
-    'Martes de clásicos: 15% de descuento en Borges, Cortázar, Sabato y García Márquez.',
-    'Club de lectura: el primer jueves de cada mes a las 19 hs, gratis, con inscripción por WhatsApp. Este mes se lee "Nuestra parte de noche".'
+    'PROMOCIONES: Combo Inicio (Kit V60 + Colombia Huila 250 g) a $39.900. Llevando 2 kg o más de café, 15% de descuento. Miércoles de recarga: trayendo tu frasco, 10% off en café a granel.'
   ].join('\n');
 
   // ---------- panel del pipeline ----------
@@ -141,7 +136,7 @@
 
   $('#ragSample').addEventListener('click', function () {
     persona.value = SAMPLE_PERSONA;
-    docs = [{ name: 'libreria-paginas-del-sur.txt', size: SAMPLE_DOC.length, text: SAMPLE_DOC }];
+    docs = [{ name: SAMPLE_NAME, size: SAMPLE_DOC.length, text: SAMPLE_DOC }];
     renderFiles();
     buildBtn.focus();
   });

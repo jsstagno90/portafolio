@@ -3,19 +3,20 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Juan Stagno — Full Stack · AI Automation</title>
-  <meta name="description" content="Portfolio de Juan Stagno: apps web con IA para negocios reales. Proyectos, decisiones técnicas y un chat con IA para preguntarme lo que quieras.">
-  <meta property="og:title" content="Juan Stagno — Full Stack · AI Automation">
-  <meta property="og:description" content="Proyectos reales, las decisiones detrás de cada uno, y un chat con IA para preguntarme lo que quieras.">
+  <title>Juan Stagno — AI Automation Engineer · Full Stack</title>
+  <meta name="description" content="Portfolio de Juan Stagno: apps web con IA para negocios reales. Creá tu propio chatbot con RAG, mirá mis proyectos y las decisiones técnicas detrás de cada uno.">
+  <meta property="og:title" content="Juan Stagno — AI Automation Engineer · Full Stack">
+  <meta property="og:description" content="Creá tu propio chatbot con RAG en segundos, mirá mis proyectos y preguntale a mi versión IA lo que quieras.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://portafolio-seven-theta-36.vercel.app/">
   <meta property="og:image" content="https://portafolio-seven-theta-36.vercel.app/img/og.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="627">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#07070b">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
   <script>
     // Aplico el tema antes de pintar, así no hay "flash" de color al cargar
@@ -23,20 +24,21 @@
   </script>
 </head>
 <body>
-  <a class="skip" href="#proyectos">Saltar a proyectos</a>
+  <div class="bg" aria-hidden="true"><span class="bg__glow bg__glow--a"></span><span class="bg__glow bg__glow--b"></span><span class="bg__grid"></span></div>
+  <a class="skip" href="#crea-tu-bot">Saltar a la demo</a>
 
   <header class="nav">
     <div class="wrap nav__inner">
-      <a href="#top" class="nav__logo" aria-label="Inicio"><span class="mono">js</span><span class="nav__slash">/</span>stagno</a>
+      <a href="#top" class="nav__logo" aria-label="Inicio"><span class="nav__mark">js</span>stagno</a>
       <nav class="nav__links" aria-label="Secciones">
+        <a href="#crea-tu-bot">Creá tu bot</a>
         <a href="#proyectos">Proyectos</a>
         <a href="#match">¿Encajo?</a>
-        <a href="#crea-tu-bot">Creá tu bot</a>
         <a href="#experiencia">Experiencia</a>
         <a href="#contacto">Contacto</a>
       </nav>
       <button class="icon-btn" id="themeToggle" aria-label="Cambiar tema claro/oscuro">
-        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9Z"/></svg>
+        <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9Z"/></svg>
       </button>
     </div>
   </header>
@@ -45,95 +47,90 @@
     <!-- HERO -->
     <section class="hero wrap">
       <div class="hero__text">
-        <p class="eyebrow mono"><span class="dot"></span> Abierto a oportunidades · <span id="heroLocation"></span></p>
-        <h1>Hola, soy Juan.<br><span class="muted" id="heroRole"></span></h1>
+        <p class="pill"><span class="dot"></span><span>Abierto a oportunidades · <span id="heroLocation"></span></span></p>
+        <h1>Hola, soy <em class="serif grad">Juan</em>.</h1>
+        <p class="hero__role" id="heroRole"></p>
         <p class="lead" id="heroTagline"></p>
         <div class="hero__cta">
-          <button class="btn btn--primary" data-open-chat>Chateá con mi versión IA</button>
-          <a class="btn btn--ghost" href="#match">¿Encajo en tu búsqueda? →</a>
-          <a class="btn btn--ghost" href="#crea-tu-bot">Creá tu chatbot →</a>
-          <a class="btn btn--ghost" href="cv/CV_Juan_Stagno.pdf" download>Descargar CV ↓</a>
+          <a class="btn btn--primary" href="#crea-tu-bot">Creá tu chatbot <span aria-hidden="true">→</span></a>
+          <button class="btn btn--ghost" data-open-chat>Chateá con mi versión IA</button>
         </div>
+        <p class="hero__links small">
+          <a href="#match">¿Encajo en tu búsqueda?</a><span aria-hidden="true">·</span>
+          <a href="cv/CV_Juan_Stagno.pdf" download>Descargar CV</a>
+        </p>
         <ul class="hero__stats" id="heroStats"></ul>
       </div>
-      <aside class="hero__card" aria-label="Cómo trabajo">
-        <div class="term">
-          <div class="term__bar"><span></span><span></span><span></span><em class="mono">como-trabajo.md</em></div>
-          <ol class="term__body mono">
-            <li><span class="k">01</span> Entiendo el problema del negocio antes que el código.</li>
-            <li><span class="k">02</span> La regla importante vive donde no se puede manipular.</li>
-            <li><span class="k">03</span> La IA propone, se valida, y la persona decide.</li>
-            <li><span class="k">04</span> Si algo salió mal, lo cuento. Así se aprende.</li>
-          </ol>
-        </div>
-      </aside>
-    </section>
 
-    <!-- PROYECTOS -->
-    <section id="proyectos" class="section wrap">
-      <header class="section__head">
-        <p class="eyebrow mono">// proyectos</p>
-        <h2>Lo que construí</h2>
-        <p class="muted">No solo qué usé: en cada uno podés abrir <strong>las decisiones técnicas</strong> — el problema, qué hice y por qué.</p>
-      </header>
-      <div class="projects" id="projects"></div>
-    </section>
-
-    <!-- MATCH -->
-    <section id="match" class="section wrap">
-      <div class="match">
-        <div class="match__intro">
-          <p class="eyebrow mono">// match con tu búsqueda</p>
-          <h2>¿Encajo en tu puesto?</h2>
-          <p class="muted">Pegá la descripción de la oferta y la IA la cruza con mis proyectos reales. Te dice dónde encajo, con qué evidencia, <strong>y también qué me falta</strong>. Prefiero que lo sepas desde el principio.</p>
-          <button class="link-btn" id="matchSample" type="button">Probar con una oferta de ejemplo</button>
-        </div>
-        <form class="match__form" id="matchForm">
-          <label for="jobText" class="sr-only">Descripción del puesto</label>
-          <textarea id="jobText" rows="9" placeholder="Buscamos Desarrollador/a Full Stack Jr. con experiencia en React, Node.js y bases de datos SQL. Valoramos conocimientos de IA..." maxlength="6000" required></textarea>
-          <div class="match__actions">
-            <span class="muted small mono" id="jobCount">0 / 6000</span>
-            <button class="btn btn--primary" type="submit" id="matchBtn">Analizar encaje</button>
+      <!-- Animación: un chatbot que se arma solo (decorativa; la demo real está abajo) -->
+      <div class="hero__demo">
+        <div class="demo spot" id="heroDemo">
+          <p class="sr-only">Animación de ejemplo: se sube un PDF, se procesa con RAG y el chatbot responde. La demo interactiva está en la sección "Creá tu propio chatbot".</p>
+          <div class="demo__bar" aria-hidden="true">
+            <span class="demo__dots"><i></i><i></i><i></i></span>
+            <span class="demo__title">creá-tu-chatbot</span>
+            <span class="demo__live"><span class="dot dot--sm"></span>demo</span>
           </div>
-        </form>
+          <div class="demo__body" aria-hidden="true">
+            <div class="demo__row">
+              <span class="demo__k">prompt</span>
+              <p class="demo__persona"><span id="dPersona"></span><span class="caret"></span></p>
+            </div>
+            <div class="demo__row">
+              <span class="demo__k">docs</span>
+              <div class="demo__file" id="dFile">
+                <span class="demo__pdf">PDF</span>
+                <span class="demo__fname">catalogo-brasa.pdf</span>
+                <span class="demo__fsize">84 KB</span>
+                <span class="demo__prog"><i id="dProg"></i></span>
+              </div>
+            </div>
+            <div class="demo__steps" id="dSteps">
+              <span data-s="0">Extracción</span><span data-s="1">Chunks</span><span data-s="2">Embeddings</span><span data-s="3">Índice</span>
+            </div>
+            <div class="demo__tiles" id="dTiles"></div>
+            <div class="demo__chat" id="dChat"></div>
+          </div>
+          <a class="demo__cta" href="#crea-tu-bot">Probalo con tus documentos <span aria-hidden="true">→</span></a>
+        </div>
       </div>
-      <div class="match__result" id="matchResult" aria-live="polite" hidden></div>
     </section>
 
     <!-- CREÁ TU CHATBOT (demo RAG) -->
     <section id="crea-tu-bot" class="section wrap">
-      <header class="section__head">
-        <p class="eyebrow mono">// demo RAG · AI engineering</p>
-        <h2>Creá tu propio chatbot</h2>
-        <p class="muted">Decile cómo tiene que actuar, subí tus documentos (catálogo, horarios, precios) y en segundos tenés un bot que responde <strong>solo con tu información</strong>. Al lado vas a ver el pipeline en vivo: cada paso, cada fragmento recuperado y el prompt que llega al modelo.</p>
+      <header class="section__head section__head--center reveal">
+        <p class="eyebrow">Demo en vivo · RAG</p>
+        <h2>Creá tu propio <em class="serif grad">chatbot</em></h2>
+        <p class="muted">Decile cómo tiene que actuar, subí tus documentos (catálogo, horarios, precios) y en segundos tenés un bot que responde <strong>solo con tu información</strong>. Al lado ves el pipeline en vivo: cada paso, cada fragmento recuperado y el prompt que llega al modelo.</p>
       </header>
 
-      <div class="rag">
-        <div class="rag__setup">
+      <div class="rag reveal">
+        <div class="rag__setup spot">
           <div class="rag__step">
-            <label for="ragPersona" class="rag__label"><span class="rag__num mono">1</span> ¿Cómo querés que actúe?</label>
+            <label for="ragPersona" class="rag__label"><span class="rag__num">1</span> ¿Cómo querés que actúe?</label>
             <textarea id="ragPersona" rows="4" maxlength="1500" placeholder="Ej: Sos el asistente de una librería de barrio. Respondé con buena onda, recomendá libros del catálogo y avisá los horarios si preguntan."></textarea>
           </div>
           <div class="rag__step">
-            <span class="rag__label"><span class="rag__num mono">2</span> Subí tus documentos</span>
+            <span class="rag__label"><span class="rag__num">2</span> Subí tus documentos</span>
             <label class="drop" id="ragDrop" for="ragFiles">
               <input type="file" id="ragFiles" accept=".pdf,.txt,.md,.csv" multiple>
+              <span class="drop__ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M12 16V4m0 0-4 4m4-4 4 4M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg></span>
               <span><b>Arrastrá o elegí archivos</b><br><span class="muted small">PDF, TXT, MD o CSV · hasta 3 archivos de 5 MB</span></span>
             </label>
             <ul class="rag__files" id="ragFileList"></ul>
           </div>
           <div class="rag__actions">
-            <button class="link-btn" type="button" id="ragSample">¿Sin archivos a mano? Cargar el ejemplo de una librería</button>
+            <button class="link-btn" type="button" id="ragSample">Cargar un ejemplo</button>
             <button class="btn btn--primary" type="button" id="ragBuild">Crear mi chatbot</button>
           </div>
-          <p class="muted small rag__privacy">Tus documentos se procesan en tu navegador y no se guardan en ningún servidor. Al cerrar la página, el bot desaparece.</p>
+          <p class="muted small rag__privacy">¿Querés probar con PDFs? Bajate los de ejemplo de una cafetería: <a href="demo/Brasa_Catalogo_Productos.pdf" download>catálogo</a> y <a href="demo/Brasa_Info_Empresa.pdf" download>info de la empresa</a>. Tus documentos se procesan en tu navegador y no se guardan en ningún servidor.</p>
         </div>
 
         <aside class="rag__pipe" aria-label="Pipeline en vivo">
           <div class="term">
-            <div class="term__bar"><span></span><span></span><span></span><em class="mono">pipeline.log</em></div>
+            <div class="term__bar"><span class="demo__dots"><i></i><i></i><i></i></span><em>pipeline.log</em></div>
             <div class="pipe" id="ragPipe" aria-live="polite">
-              <p class="pipe__empty mono">Esperando documentos…<br><span class="muted">extracción → chunking → embeddings → índice → búsqueda → respuesta</span></p>
+              <p class="pipe__empty">Esperando documentos…<br><span class="muted">extracción → chunking → embeddings → índice → búsqueda → respuesta</span></p>
             </div>
           </div>
         </aside>
@@ -152,7 +149,7 @@
         </form>
       </div>
 
-      <details class="rag__how">
+      <details class="rag__how reveal">
         <summary>Cómo está programado</summary>
         <div class="rag__how-body">
           <ol class="how">
@@ -163,7 +160,7 @@
             <li><b>Retrieval.</b> Tu pregunta se convierte en vector (<code>RETRIEVAL_QUERY</code>) y se compara con todos los fragmentos por similitud coseno. Se quedan los 4 más parecidos.</li>
             <li><b>Generación.</b> Al modelo (<code>gemini-2.5-flash</code>, con fallback a otros si está saturado) le llegan: tus instrucciones, reglas que no se pueden pisar ("respondé solo con los fragmentos, no inventes precios") y los fragmentos recuperados.</li>
           </ol>
-          <h4 class="mono small muted">DECISIONES TÉCNICAS</h4>
+          <h4>Decisiones técnicas</h4>
           <div class="decision"><dl>
             <dt class="p">Problema</dt><dd>Guardar documentos de cualquier visitante en una base implica privacidad, limpieza y costo.</dd>
             <dt class="d">Decisión</dt><dd>El vector store vive en el navegador; el servidor no guarda nada.</dd>
@@ -183,25 +180,70 @@
       </details>
     </section>
 
+    <!-- PROYECTOS -->
+    <section id="proyectos" class="section wrap">
+      <header class="section__head reveal">
+        <p class="eyebrow">Proyectos</p>
+        <h2>Lo que <em class="serif grad">construí</em></h2>
+        <p class="muted">No solo qué usé: en cada uno podés abrir <strong>las decisiones técnicas</strong> — el problema, qué hice y por qué.</p>
+      </header>
+      <div class="projects" id="projects"></div>
+    </section>
+
+    <!-- MATCH -->
+    <section id="match" class="section wrap">
+      <div class="match spot reveal">
+        <div class="match__intro">
+          <p class="eyebrow">Match con tu búsqueda</p>
+          <h2>¿Encajo en tu <em class="serif grad">puesto</em>?</h2>
+          <p class="muted">Pegá la descripción de la oferta y la IA la cruza con mis proyectos reales. Te dice dónde encajo, con qué evidencia, <strong>y también qué me falta</strong>. Prefiero que lo sepas desde el principio.</p>
+          <button class="link-btn" id="matchSample" type="button">Probar con una oferta de ejemplo</button>
+        </div>
+        <form class="match__form" id="matchForm">
+          <label for="jobText" class="sr-only">Descripción del puesto</label>
+          <textarea id="jobText" rows="9" placeholder="Buscamos Desarrollador/a Full Stack con experiencia en React, Node.js y bases de datos SQL. Valoramos conocimientos de IA..." maxlength="6000" required></textarea>
+          <div class="match__actions">
+            <span class="muted small mono" id="jobCount">0 / 6000</span>
+            <button class="btn btn--primary" type="submit" id="matchBtn">Analizar encaje</button>
+          </div>
+        </form>
+      </div>
+      <div class="match__result" id="matchResult" aria-live="polite" hidden></div>
+    </section>
+
     <!-- EXPERIENCIA -->
     <section id="experiencia" class="section wrap">
-      <header class="section__head">
-        <p class="eyebrow mono">// experiencia</p>
-        <h2>Dónde estoy trabajando</h2>
+      <header class="section__head reveal">
+        <p class="eyebrow">Experiencia</p>
+        <h2>Dónde estoy <em class="serif grad">trabajando</em></h2>
       </header>
       <div class="xp" id="experience"></div>
     </section>
 
+    <!-- CÓMO TRABAJO -->
+    <section class="section wrap">
+      <header class="section__head reveal">
+        <p class="eyebrow">Cómo trabajo</p>
+        <h2>Reglas que <em class="serif grad">no negocio</em></h2>
+      </header>
+      <ol class="principles reveal">
+        <li class="spot"><span class="principles__n">01</span><p>Entiendo el problema del negocio antes que el código.</p></li>
+        <li class="spot"><span class="principles__n">02</span><p>La regla importante vive donde no se puede manipular.</p></li>
+        <li class="spot"><span class="principles__n">03</span><p>La IA propone, se valida, y la persona decide.</p></li>
+        <li class="spot"><span class="principles__n">04</span><p>Si algo salió mal, lo cuento. Así se aprende.</p></li>
+      </ol>
+    </section>
+
     <!-- STACK + FORMACIÓN -->
     <section class="section wrap split">
-      <div>
-        <p class="eyebrow mono">// stack</p>
-        <h2>Con qué trabajo</h2>
+      <div class="reveal">
+        <p class="eyebrow">Stack</p>
+        <h2>Con qué <em class="serif grad">trabajo</em></h2>
         <div id="stack"></div>
       </div>
-      <div>
-        <p class="eyebrow mono">// formación</p>
-        <h2>De dónde vengo</h2>
+      <div class="reveal">
+        <p class="eyebrow">Formación</p>
+        <h2>De dónde <em class="serif grad">vengo</em></h2>
         <div id="about" class="about"></div>
         <ul class="edu" id="education"></ul>
       </div>
@@ -209,8 +251,8 @@
 
     <!-- CONTACTO -->
     <section id="contacto" class="section wrap">
-      <div class="contact">
-        <h2>¿Hablamos?</h2>
+      <div class="contact reveal">
+        <h2>¿<em class="serif grad">Hablamos</em>?</h2>
         <p class="muted">Si tenés un puesto, un proyecto o una duda, escribime. Respondo rápido.</p>
         <div class="contact__links" id="contactLinks"></div>
       </div>
@@ -218,13 +260,13 @@
   </main>
 
   <footer class="wrap footer muted small">
-    <span>Hecho a mano por Juan Stagno · HTML, CSS, JS y una función serverless con Gemini.</span>
-    <a href="https://github.com/jsstagno90/portafolio" target="_blank" rel="noopener">Ver el código de esta web</a>
+    <span>Hecho a mano por Juan Stagno · HTML, CSS, JS y funciones serverless con Gemini.</span>
+    <a href="https://github.com/jsstagno90/portafolio" target="_blank" rel="noopener">Ver el código de esta web ↗</a>
   </footer>
 
   <!-- CHAT -->
   <button class="chat-fab" data-open-chat aria-label="Abrir el chat">
-    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-5 4v-4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm4 7a1.3 1.3 0 1 0 0-2.6A1.3 1.3 0 0 0 8 11Zm4 0a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6Zm4 0a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6Z"/></svg>
+    <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-5 4v-4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm4 7a1.3 1.3 0 1 0 0-2.6A1.3 1.3 0 0 0 8 11Zm4 0a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6Zm4 0a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6Z"/></svg>
     <span>Preguntame</span>
   </button>
 
@@ -248,5 +290,6 @@
   <script src="data/profile.js"></script>
   <script src="js/main.js"></script>
   <script src="js/rag.js"></script>
+  <script src="js/effects.js"></script>
 </body>
 </html>
